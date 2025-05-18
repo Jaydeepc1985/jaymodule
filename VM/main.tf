@@ -43,6 +43,14 @@ resource "azurerm_linux_virtual_machine" "frontend_vm" {
       version   = source_image_reference.value.version
     }
  } 
+ custom_data = base64encode(<<-EOF
+              #!/bin/bash
+              sudo apt update
+              sudo apt install -y nginx
+              sudo systemctl enable nginx
+              sudo systemctl start nginx
+              EOF
+  )
   
 }
 resource "azurerm_linux_virtual_machine" "backend_vm" {

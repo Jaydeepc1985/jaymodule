@@ -13,10 +13,10 @@ provider "azurerm" {
 }
 # terraform {
 #   backend "azurerm" {
-#     resource_group_name  = "jaydeep_rg1"
-#     storage_account_name = "jaydeepstg678"
-#     container_name       = "jaydeepcnt678"
+#     resource_group_name  = "jaydeep_rg"
+#     storage_account_name = "jaydeepstg321"
+#     container_name       = "jaydeepcnt321"
 #     key                  = "terraform.tfstate"
 
 #   }
-# }
+#  }
