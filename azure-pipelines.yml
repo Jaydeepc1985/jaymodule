@@ -1,0 +1,48 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+  - main  # GitHub repo ki 'main' branch mein commit hone par pipeline chalegi
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+variables:
+  terraformVersion: '1.5.7'
+  environment: 'dev'
+
+steps:
+
+# 🔐 GitHub repo se code clone karne ke liye
+- checkout: self
+  persistCredentials: true
+
+# ✅ Terraform install
+- task: TerraformInstaller@1
+  inputs:
+    terraformVersion: '$(terraformVersion)'
+
+# 📂 Terraform working directory (agar aapka code kisi subfolder mein hai to path badlein)
+- script: |
+    terraform init
+  workingDirectory: 'Dev'
+  displayName: 'Terraform Init'
+
+- script: |
+    terraform validate
+  workingDirectory: 'terraform'
+  displayName: 'Terraform Validate'
+
+- script: |
+    terraform plan -var="env=$(environment)"
+  workingDirectory: 'terraform'
+  displayName: 'Terraform Plan'
+
+- script: |
+    terraform apply -auto-approve -var="env=$(environment)"
+  workingDirectory: 'terraform'
+  displayName: 'Terraform Apply'
+
+
