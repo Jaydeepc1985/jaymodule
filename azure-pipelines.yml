@@ -33,18 +33,18 @@ steps:
 # ✅ Terraform Validate
 - script: |
     terraform validate
-  workingDirectory: 'terraform'
+  workingDirectory: 'Dev'
   displayName: 'Terraform Validate'
 
 # ✅ Terraform Plan
 - script: |
     terraform plan -var="env=$(environment)"
-  workingDirectory: 'terraform'
+  workingDirectory: 'Dev'
   displayName: 'Terraform Plan'
 
 # ✅ Terraform Apply
 - script: |
     terraform apply -auto-approve -var="env=$(environment)"
-  workingDirectory: 'terraform'
+  workingDirectory: 'Dev'
   displayName: 'Terraform Apply'
 
