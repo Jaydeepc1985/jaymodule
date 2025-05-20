@@ -38,13 +38,13 @@ steps:
 
 # ✅ Terraform Plan
 - script: |
-    terraform plan -var="env=$(environment)"
+    terraform plan
   workingDirectory: 'Dev'
   displayName: 'Terraform Plan'
 
 # ✅ Terraform Apply
 - script: |
-    terraform apply -auto-approve -var="env=$(environment)"
+    terraform apply -auto-approve
   workingDirectory: 'Dev'
   displayName: 'Terraform Apply'
 
