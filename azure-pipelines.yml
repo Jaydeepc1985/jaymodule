@@ -27,7 +27,7 @@ steps:
 # ✅ Terraform Init
 - script: |
     terraform init
-  workingDirectory: 'terraform'     # 👈 aapka terraform code jis folder mein hai
+  workingDirectory: 'Dev'     # 👈 aapka terraform code jis folder mein hai
   displayName: 'Terraform Init'
 
 # ✅ Terraform Validate
