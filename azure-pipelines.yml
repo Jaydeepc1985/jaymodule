@@ -4,10 +4,10 @@
 # https://aka.ms/yaml
 
 trigger:
-  - main  # GitHub repo ki 'main' branch mein commit hone par pipeline chalegi
+  - main  # jab GitHub ke main branch me commit ho
 
 pool:
-  vmImage: 'ubuntu-latest'
+  name: 'jay'   # 👈 yahan aapke self-hosted agent pool ka naam
 
 variables:
   terraformVersion: '1.5.7'
@@ -15,34 +15,36 @@ variables:
 
 steps:
 
-# 🔐 GitHub repo se code clone karne ke liye
+# ✅ GitHub se code checkout karega
 - checkout: self
   persistCredentials: true
 
-# ✅ Terraform install
-- task: TerraformInstaller@1
-  inputs:
-    terraformVersion: '$(terraformVersion)'
+# ✅ Optional: Terraform version check (maan ke chalte hain self-hosted agent pe install hai)
+- script: |
+    terraform version
+  displayName: 'Check Terraform Version'
 
-# 📂 Terraform working directory (agar aapka code kisi subfolder mein hai to path badlein)
+# ✅ Terraform Init
 - script: |
     terraform init
-  workingDirectory: 'Dev'
+  workingDirectory: 'terraform'     # 👈 aapka terraform code jis folder mein hai
   displayName: 'Terraform Init'
 
+# ✅ Terraform Validate
 - script: |
     terraform validate
   workingDirectory: 'terraform'
   displayName: 'Terraform Validate'
 
+# ✅ Terraform Plan
 - script: |
     terraform plan -var="env=$(environment)"
   workingDirectory: 'terraform'
   displayName: 'Terraform Plan'
 
+# ✅ Terraform Apply
 - script: |
     terraform apply -auto-approve -var="env=$(environment)"
   workingDirectory: 'terraform'
   displayName: 'Terraform Apply'
-
 
