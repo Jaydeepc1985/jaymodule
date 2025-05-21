@@ -44,7 +44,8 @@ steps:
 
 # ✅ Terraform Apply
 - script: |
-    terraform apply -auto-approve
+    terraform apply -auto-approve -no-color
+    echo "Terraform apply complete"
   workingDirectory: 'Dev'
   displayName: 'Terraform Apply'
 
