@@ -172,8 +172,8 @@ backend_vm_x = {
     source_image_reference = {
       "Canonnical" = {
         publisher = "Canonical"
-        offer     = "0001-com-ubuntu-server-jammy"
-        sku       = "22_04-LTS"
+        offer     = "0001-com-ubuntu-server-focal"
+        sku       = "20_04-lts"
         version   = "latest"
       }
 

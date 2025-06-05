@@ -88,5 +88,11 @@ resource "azurerm_linux_virtual_machine" "backend_vm" {
       version   = source_image_reference.value.version
     }
  } 
+  custom_data = base64encode(<<-EOF
+                #!/bin/bash
+                sudo apt update -y
+                sudo apt install -y python3 python3-pip
+                EOF
+    )
   
 }
