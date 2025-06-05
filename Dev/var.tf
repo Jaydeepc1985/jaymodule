@@ -23,19 +23,19 @@ variable "cnt_x" {
   }))
 
 }
-variable "flexi_server_x" {
-  type = map(object({
-    name                   = string
-    resource_group_name    = string
-    location               = string
-    administrator_login    = string
-    administrator_password = string
-    sku                    = string
-    version                = string
-    tags                   = map(string)
-  }))
+# variable "flexi_server_x" {
+#   type = map(object({
+#     name                   = string
+#     resource_group_name    = string
+#     location               = string
+#     administrator_login    = string
+#     administrator_password = string
+#     sku                    = string
+#     version                = string
+#     tags                   = map(string)
+#   }))
 
-}
+# }
 variable "vnet_x" {
   type = map(object({
     name                = string
@@ -172,4 +172,29 @@ variable "NSG_x" {
     tags = map(string)
   }))
 
+}
+variable "sql-server_x" {
+  description = "Map of SQL Server configurations"
+  type = map(object({
+    name                         = string
+    resource_group_name          = string
+    location                     = string
+    version                      = string
+    administrator_login          = string
+    administrator_login_password = string
+    minimum_tls_version          = string
+    tags                         = map(string)
+  }))
+
+}
+variable "sql-database_x" {
+  description = "Map of SQL Database configurations"
+  type = map(object({
+    name         = string
+    server_id    = string
+    max_size_gb  = number
+    sku_name     = string
+    enclave_type = string
+    tags         = map(string)
+  }))
 }

@@ -8,11 +8,11 @@ module "abc" {
   cnt        = var.cnt_x
   depends_on = [module.xyz]
 }
-module "flexi_server" {
-  source       = "../flexi server"
-  flexi_server = var.flexi_server_x
-  depends_on   = [module.abc]
-}
+# module "flexi_server" {
+#   source       = "../flexi server"
+#   flexi_server = var.flexi_server_x
+#   depends_on   = [module.abc]
+# }
 module "Vnet" {
   source     = "../vnet"
   vnet_y     = var.vnet_x
@@ -28,7 +28,7 @@ module "subnet" {
 module "public_ip" {
   source     = "../publicip"
   public_ip  = var.public_ip_x
-  depends_on = [module.Vnet ]
+  depends_on = [module.Vnet]
 
 }
 module "nic" {
@@ -47,6 +47,18 @@ module "VM" {
 module "NSG" {
   source     = "../NSG"
   NSG        = var.NSG_x
-  depends_on = [module.nic,module.VM]
+  depends_on = [module.nic, module.VM]
+
+}
+module "sqlsrv" {
+  source     = "../sqlsrv"
+  sql-server = var.sql-server_x
+  depends_on = [module.abc]
+
+}
+module "sqldb" {
+  source       = "../sqldb"
+  sql-database = var.sql-database_x
+  depends_on   = [module.sqlsrv]
 
 }

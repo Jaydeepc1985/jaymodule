@@ -28,23 +28,23 @@ cnt_x = {
 
   }
 }
-flexi_server_x = {
-  "srv" = {
-    name                   = "jaydeepflexi-srver"
-    resource_group_name    = "jaydeep_rg1"
-    location               = "Central india"
-    administrator_login    = "jaydeepc1985"
-    administrator_password = "Oneday@123"
-    sku                    = "B_Standard_B1ms"
-    version                = "8.0.21"
-    tags = {
-      environment   = "dev"
-      workload_type = "Dev/Test"
+# flexi_server_x = {
+#   "srv" = {
+#     name                   = "jaydeepflexi-srver"
+#     resource_group_name    = "jaydeep_rg1"
+#     location               = "Central india"
+#     administrator_login    = "jaydeepc1985"
+#     administrator_password = "Oneday@123"
+#     sku                    = "B_Standard_B1ms"
+#     version                = "8.0.21"
+#     tags = {
+#       environment   = "dev"
+#       workload_type = "Dev/Test"
 
-    }
+#     }
 
-  }
-}
+#   }
+# }
 vnet_x = {
   "vnet_z" = {
     name                = "JaydeepVnet"
@@ -221,7 +221,7 @@ NSG_x = {
     location            = "Central india"
     resource_group_name = "jaydeep_rg1"
     security_rule = {
-      "rule2" = {
+      "rule1" = {
         name                       = "Allow-SSH"
         priority                   = 200
         direction                  = "Inbound"
@@ -232,9 +232,48 @@ NSG_x = {
         source_address_prefix      = "*"
         destination_address_prefix = "*"
       }
+      "rule1" = {
+        name                       = "Allow-SSH"
+        priority                   = 210
+        direction                  = "Inbound"
+        access                     = "Allow"
+        protocol                   = "Tcp"
+        source_port_range          = "*"
+        destination_port_range     = "8000"
+        source_address_prefix      = "*"
+        destination_address_prefix = "*"
+      }
     }
     tags = {
       environment = "production"
+    }
+  }
+}
+sql-server_x = {
+  "sql-server" = {
+    name                         = "jaydeep-sql-server"
+    resource_group_name          = "jaydeep_rg1"
+    location                     = "Central india"
+    version                      = "12.0"
+    administrator_login          = "jaydeepc1985"
+    administrator_login_password = "Oneday@123"
+    minimum_tls_version          = "1.2"
+    tags = {
+      environment = "dev"
+      project     = "SQLProject"
+    }
+  }
+}
+sql-database_x = {
+  "sql-database" = {
+    name         = "jaydeep-sql-database"
+    server_id    = "sql"
+    max_size_gb  = 2
+    sku_name     = "S0"
+    enclave_type = "VBS"
+    tags = {
+      environment = "dev"
+      project     = "SQLProject"
     }
   }
 }
